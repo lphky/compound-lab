@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#17324a">
+  <meta name="description" content="香港中三數學複利息互動教材：用互動圖表比較單利息與複利息，推導 A = P(1 + r%)ⁿ，並有錯題診所及24題題庫。">
+  <title>複利實驗室</title>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳至主要內容</a>
+  <header class="top">
+    <a class="brand" href="#home"><img src="./icon.svg" alt="" width="38" height="38"><span>複利實驗室<small>中三數學</small></span></a>
+    <details class="tools">
+      <summary>老師工具</summary>
+      <div>
+        <label><input type="checkbox" data-pref="large">大字投影</label>
+        <label><input type="checkbox" data-pref="reveal">教師揭曉</label>
+        <label><input type="checkbox" data-pref="calm">減少動畫</label>
+        <a href="#worksheet">列印工作紙</a>
+      </div>
+    </details>
+  </header>
+  <nav id="level-nav" aria-label="關卡"></nav>
+  <div id="storage-note" role="status"></div>
+  <main id="main" tabindex="-1"></main>
+  <footer><span>所有利率和情境均為虛構，不連結真實金融產品。</span><span>純前端教材 · 進度只保留於此瀏覽器</span></footer>
+  <dialog id="clear-dialog"><h2>清除學習進度？</h2><p>將移除各關完成紀錄及最佳成績，無法復原。</p><form method="dialog"><button value="cancel">保留進度</button><button value="clear" class="danger">確認清除</button></form></dialog>
+</body>
+</html>
