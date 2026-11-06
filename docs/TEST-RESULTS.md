@@ -35,4 +35,4 @@
 
 ## 部署
 
-見 README 網址；上線後的檢查結果記於下方。
+2026-11-06 發布至 https://lphky.github.io/compound-lab/ （main 根目錄 Pages）。同一套 141 項瀏覽器檢查直接對正式網址執行，全部通過。
