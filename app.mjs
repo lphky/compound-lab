@@ -6,6 +6,7 @@ import { state, save, clearProgress, doneCount, hasBadge } from './store.mjs';
 import { level1, level2, level3, level4, level5 } from './levels.mjs';
 import { level6 } from './quiz.mjs';
 import { renderLab } from './lab.mjs';
+import { renderDebt } from './debt.mjs';
 
 const main = $('#main');
 let cleanup = null;
@@ -33,6 +34,7 @@ function home() {
     <div class="duo">${talk('dan', '每年利息都一樣，我一條直線行到尾。')}${talk('fuk', '利息留低再生息，我會愈行愈快！')}</div>
     <section class="section-head"><h2>六個關卡</h2><span>已完成 ${done} / 6</span></section>
     <div class="level-grid">${LEVELS.map((l) => `<a class="level-card${state.done[l.n] ? ' done' : ''}" href="#level-${l.n}"><span class="no">${state.done[l.n] ? '✓' : l.n}</span><h3>${l.title}</h3><p>${l.blurb}</p></a>`).join('')}
+      <a class="level-card" href="#debt"><span class="no">＋</span><h3>卡數怪獸</h3><p>算出兩年後的欠款，用逐月互動圖表觀察複利的另一面。</p></a>
       <a class="level-card lab-card" href="#lab"><span class="no">∞</span><h3>自由實驗</h3><p>早開始與遲開始、欠款增長、增長與折舊。</p></a></div>
     ${hasBadge() ? `<section class="badge card"><span>${BADGE}</span><div><h2>複利實驗員</h2><p>你已完成全部六關${state.best !== null ? `，最佳成績 ${state.best} / 10` : ''}。</p></div></section>` : ''}
     <section class="card progress-row"><div><h2>給老師</h2><p>頁首「老師工具」有大字投影、教師揭曉及減少動畫。工作紙可列印，附獨立答案頁。</p></div><div class="player"><a class="button" href="#worksheet">工作紙</a>${done ? '<button type="button" id="clear">清除進度</button>' : ''}</div></section>`;
@@ -87,10 +89,10 @@ function worksheet() {
   return null;
 }
 
-const ROUTES = { home, worksheet, lab: () => renderLab(main), 'level-1': () => level1(main), 'level-2': () => level2(main), 'level-3': () => level3(main), 'level-4': () => level4(main), 'level-5': () => level5(main), 'level-6': () => level6(main) };
+const ROUTES = { home, worksheet, debt: () => renderDebt(main), lab: () => renderLab(main), 'level-1': () => level1(main), 'level-2': () => level2(main), 'level-3': () => level3(main), 'level-4': () => level4(main), 'level-5': () => level5(main), 'level-6': () => level6(main) };
 
 function nav(route) {
-  $('#level-nav').innerHTML = `${LEVELS.map((l) => `<a href="#level-${l.n}"${route === `level-${l.n}` ? ' aria-current="page"' : ''}><span>${state.done[l.n] ? '✓' : l.n}</span>${l.short}</a>`).join('')}<a href="#lab"${route === 'lab' ? ' aria-current="page"' : ''}><span>∞</span>自由實驗</a>`;
+  $('#level-nav').innerHTML = `${LEVELS.map((l) => `<a href="#level-${l.n}"${route === `level-${l.n}` ? ' aria-current="page"' : ''}><span>${state.done[l.n] ? '✓' : l.n}</span>${l.short}</a>`).join('')}<a href="#debt"${route === 'debt' ? ' aria-current="page"' : ''}><span>＋</span>卡數怪獸</a><a href="#lab"${route === 'lab' ? ' aria-current="page"' : ''}><span>∞</span>自由實驗</a>`;
   $('#level-nav').hidden = route === 'home' || route === 'worksheet';
   const current = $('#level-nav [aria-current]');
   if (current) $('#level-nav').scrollLeft = current.offsetLeft - $('#level-nav').offsetLeft - 20;
@@ -104,7 +106,7 @@ function route() {
   main.className = key === 'worksheet' ? 'wide' : '';
   nav(key);
   cleanup = ROUTES[key]() ?? null;
-  document.title = `${key === 'home' ? '' : `${key === 'lab' ? '自由實驗' : key === 'worksheet' ? '工作紙' : LEVELS[Number(key.slice(-1)) - 1].title} · `}複利實驗室`;
+  document.title = `${key === 'home' ? '' : `${key === 'debt' ? '卡數怪獸' : key === 'lab' ? '自由實驗' : key === 'worksheet' ? '工作紙' : LEVELS[Number(key.slice(-1)) - 1].title} · `}複利實驗室`;
   window.scrollTo(0, 0);
   main.focus({ preventScroll: true });
 }

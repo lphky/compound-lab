@@ -107,3 +107,7 @@ test('教材文字不含僥倖框架用語', () => {
     assert.doesNotMatch(readFileSync(new URL(file, root), 'utf8'), /賭|博彩|碰運氣|試手氣|搏一搏/, file);
   }
 });
+
+test('卡數怪獸：Python Decimal 獨立驗算兩年每月複利', () => {
+  assert.ok(Math.abs(M.compoundAmount(5000, 36, 2, 12) - 10163.970532302013) < 1e-8);
+});

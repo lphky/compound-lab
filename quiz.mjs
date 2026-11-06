@@ -133,7 +133,7 @@ export function level6(main) {
         <p>首次作答、沒有用提示而答對的題數</p>
         <div class="table-wrap short"><table><caption>各類題目結果</caption><tbody>${rows}</tbody></table></div>
         ${hasBadge() ? '<p class="note">你已完成全部六關，首頁已顯示「複利實驗員」徽章。</p>' : '<p class="note">完成全部六關後，首頁會顯示徽章。</p>'}
-        <div class="player centered"><button type="button" class="primary" id="again">再抽 10 題</button><a class="button" href="#lab">到自由實驗</a><a class="button" href="#home">回首頁</a></div>
+        <div class="player centered"><button type="button" class="primary" id="again">再抽 10 題</button><a class="button" href="#debt">挑戰卡數怪獸</a><a class="button" href="#lab">到自由實驗</a><a class="button" href="#home">回首頁</a></div>
       </div>`;
     $('#again', main).addEventListener('click', start);
   }
